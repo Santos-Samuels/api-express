@@ -7,8 +7,9 @@ module.exports = {
     const user = await User.getByEmail(email);
 
     if (user) {
-      return response.status(200).json({
-        mensagem: 'Já existe um usuário com esse email!',
+      return response.status(400).json({
+        statusCode: 400,
+        message: 'Já existe um usuário com esse email!',
       });
     }
 
@@ -20,11 +21,13 @@ module.exports = {
       });
 
       return response.status(200).json({
-        mensagem: 'User cadastrado com sucesso!',
+        statusCode: 200,
+        message: 'User cadastrado com sucesso!',
       });
     } catch (error) {
-      return response.status(400).json({
-        mensagem: 'Erro ao cadastrar usuário!',
+      return response.status(500).json({
+        statusCode: 500,
+        message: 'Erro ao cadastrar usuário!',
       });
     }
   },
@@ -34,11 +37,13 @@ module.exports = {
       const users = await User.list();
 
       return response.status(200).json({
+        statusCode: 200,
         users,
       });
     } catch (error) {
       return response.status(400).json({
-        mensagem: 'Nenhum usuário encontrado!',
+        statusCode: 400,
+        message: 'Nenhum usuário encontrado!',
       });
     }
   },
@@ -51,16 +56,19 @@ module.exports = {
 
       if (user) {
         return response.status(200).json({
+          statusCode: 200,
           user,
         });
       }
 
       return response.status(400).json({
-        mensagem: 'Nenhum usuário encontrado!',
+        statusCode: 400,
+        message: 'Nenhum usuário encontrado!',
       });
     } catch (error) {
-      return response.status(400).json({
-        mensagem: 'Erro ao buscar usuário!',
+      return response.status(500).json({
+        statusCode: 500,
+        message: 'Erro ao buscar usuário!',
       });
     }
   },
@@ -72,11 +80,13 @@ module.exports = {
       await User.delete(userId);
 
       return response.status(200).json({
-        mensagem: 'Usuário removido com sucesso',
+        statusCode: 200,
+        message: 'Usuário removido com sucesso',
       });
     } catch (error) {
       return response.status(400).json({
-        mensagem: 'Erro ao remover usuário!',
+        statusCode: 400,
+        message: 'Erro ao remover usuário!',
       });
     }
   },
@@ -95,11 +105,13 @@ module.exports = {
       await User.update(updatedUser, userId);
 
       return response.status(200).json({
-        mensagem: 'Usuário atualizado com sucesso!',
+        statusCode: 200,
+        message: 'Usuário atualizado com sucesso!',
       });
     } catch (error) {
       return response.status(400).json({
-        mensagem: 'Erro ao atualizar usuário!',
+        statusCode: 400,
+        message: 'Erro ao atualizar usuário!',
       });
     }
   },
